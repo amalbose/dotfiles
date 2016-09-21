@@ -1,0 +1,18 @@
+# Performs apt cleanup
+# Aug 11 2016
+# amalbose
+
+echo "Running apt cache cleanup..."
+
+echo "Original apt cache size:"
+echo `sudo du -sh /var/cache/apt/archives`
+
+# Performing Cleanup
+sudo apt clean
+
+echo ""
+echo "Size after cleanup:"
+echo `sudo du -sh /var/cache/apt/archives`
+
+echo "Cleanup completed!!!"
+

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+echo "Navigating to grive folder"
+cd ~/grive
+
+STARTTIME=$(date +%s)
+echo "Executing sync command - grive"
+
+grive
+
+ENDTIME=$(date +%s)
+
+echo ""
+echo "Sync completed in $(($ENDTIME - $STARTTIME)) seconds"
+
