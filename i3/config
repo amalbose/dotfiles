@@ -111,6 +111,7 @@ assign [class="google-chrome"] $workspace1
 assign [class="Thunar"] $workspace3
 assign [class="Gnome-terminal"] $workspace2
 
+new_window 1pixel
 # reload the configuration file
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
@@ -145,10 +146,13 @@ bar {
     tray_output primary
     font pango: System San Francisco Display, FontAwesome 9
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
-    position top 
+    position top
     strip_workspace_numbers yes
     bindsym button4 nop
     bindsym button5 nop
+    #mode hide
+    #hidden_state hide
+    #modifier Mod4
     colors {
       separator $base03
       background $base01
