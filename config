@@ -1,0 +1,183 @@
+# Mod key
+
+set $mod Mod4
+
+font pango:System San Francisco Display 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 340 -opacity "85" -bw 0 -bc "#101218" -bg "#101218" -fg "#ffffff" -hlbg "#101218" -hlfg "#9575cd" -font "System San Francisco Display 14"
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# fullscreen
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# Colors
+set $base00 #101218
+set $base01 #1f222d
+set $base02 #252936
+set $base03 #7780a1
+set $base04 #C0C5CE
+set $base05 #d1d4e0
+set $base06 #C9CCDB
+set $base07 #ffffff
+set $base08 #ef2b2b
+set $base09 #f99170
+set $base0A #ffefcc
+set $base0B #a5ffe1
+set $base0C #97e0ff
+set $base0D #97bbf7
+set $base0E #c0b7f9
+set $base0F #fcc09e
+
+set $workspace1 "1: "
+set $workspace2 "2: "
+set $workspace3 "3: "
+set $workspace4 "4: "
+set $workspace6 "6: Others"
+
+# switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace 5 
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# Assign workspaces
+assign [class="vlc"] $workspace4
+assign [class="Firefox"] $workspace1
+assign [class="Opera"] $workspace1
+assign [class="google-chrome"] $workspace1
+assign [class="Thunar"] $workspace3
+assign [class="Gnome-terminal"] $workspace2
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Widow Colours
+#                         border  background text    indicator
+ client.focused          $base01 $base01    $base07 $base0F
+ client.focused_inactive $base02 $base02    $base03 $base0F
+ client.unfocused        $base02 $base02    $base03 $base0F
+ client.urgent           $base02 $base08    $base00 $base0F
+
+hide_edge_borders both
+
+bar {
+    tray_output primary
+    font pango: System San Francisco Display, FontAwesome 9
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    position top 
+    strip_workspace_numbers yes
+    bindsym button4 nop
+    bindsym button5 nop
+    colors {
+      separator $base03
+      background $base01
+      statusline $base05
+#                        border  background text
+      focused_workspace  $base01 $base01    $base07
+      active_workspace   $base01 $base02    $base03
+      inactive_workspace $base01 $base01    $base03
+      urgent_workspace   $base01 $base01    $base08
+	}
+}
+
+exec --no-startup-id gnome-settings-daemon
+
+#Custom
+bindsym $mod+shift+x exec i3lock
+bindsym $mod+shift+f exec firefox
+
+#Pulse Audio Control
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 
+
+#Start Up applications
+exec --no-startup-id nm-applet
+exec_always feh --bg-fill /usr/share/backgrounds/clock_by_Bernhard_Hanakam.jpg
+exec_always compton
+
