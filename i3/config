@@ -72,19 +72,20 @@ set $base0C #97e0ff
 set $base0D #97bbf7
 set $base0E #c0b7f9
 set $base0F #fcc09e
+set $base0G #161d28
 
 set $workspace1 "1: "
 set $workspace2 "2: "
 set $workspace3 "3: "
 set $workspace4 "4: "
-set $workspace6 "6: Others"
+set $workspace5 "5: "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
 bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace 5 
+bindsym $mod+5 workspace $workspace5 
 bindsym $mod+6 workspace $workspace6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
@@ -96,7 +97,7 @@ bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
 bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+5 move container to workspace $workspace5
 bindsym $mod+Shift+6 move container to workspace $workspace6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
@@ -110,8 +111,11 @@ assign [class="Opera"] $workspace1
 assign [class="google-chrome"] $workspace1
 assign [class="Thunar"] $workspace3
 assign [class="Gnome-terminal"] $workspace2
+assign [class="Sublime"] $workspace5
+assign [class="Eclipse"] $workspace5
 
-new_window 1pixel
+#new_window 1pixel
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
@@ -135,7 +139,7 @@ bindsym $mod+r mode "resize"
 
 # Widow Colours
 #                         border  background text    indicator
- client.focused          $base01 $base01    $base07 $base0F
+ client.focused          $base0G $base0G    $base07 $base0F
  client.focused_inactive $base02 $base02    $base03 $base0F
  client.unfocused        $base02 $base02    $base03 $base0F
  client.urgent           $base02 $base08    $base00 $base0F
@@ -169,7 +173,8 @@ exec --no-startup-id gnome-settings-daemon
 
 #Custom
 bindsym $mod+shift+x exec i3lock
-bindsym $mod+shift+f exec firefox
+bindsym $mod+shift+f exec firefox; workspace $workspace1
+bindsym $mod+t workspace $workspace3; exec thunar
 
 #Pulse Audio Control
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
@@ -182,6 +187,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20
 
 #Start Up applications
 #exec --no-startup-id nm-applet
-exec_always feh --bg-fill /usr/share/backgrounds/clock_by_Bernhard_Hanakam.jpg
-exec_always compton
-
+exec_always feh --bg-fill ~/Pictures/wallpapers/landscape.jpg 
+exec_always --no-startup-id compton
+exec xset -q
